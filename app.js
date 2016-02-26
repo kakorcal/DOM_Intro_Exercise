@@ -66,15 +66,13 @@ window.addEventListener('load', function(e) {
 }, false);
 
 // Declare key arrays
-// var keys = [38, 40, 37, 39, 66, 65];
-var key = null;
-var keyCombo = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65];
 var keyMatch = [];
+var keyCombo = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65];
 window.addEventListener('keydown', function(e){
   // When the 1, 2, 3, 4, 5, 6, 7, 8, 9, or 0 key is pressed, 
   //the page alerts the message "I HATE NUMBERZZZ!"
   // Number codes: 48 - 57
-  key = e.keyCode;
+  var key = e.keyCode;
   for(var i = 48; i <= 57; i++){
     if(key === i){
       alert('I HATE NUMBERZZZ!');
@@ -86,15 +84,19 @@ window.addEventListener('keydown', function(e){
   // Up: 38 Down: 40 Left: 37 Right: 39 B: 66 A: 65
   if(key === 38 || key === 40 ||
      key === 37 || key === 39 ||
-     key === 66 || key === 65 ){
+     key === 66 || key === 65){
     keyMatch.push(key);
   }else{
     keyMatch = [];
   }
 
   for(var i = 0; i < keyMatch.length; i++){
+    if(keyMatch[2] === 38){
+      keyMatch = [key, key];
+      break;
+    }
     if(keyMatch[i] !== keyCombo[i]){
-      keyMatch = [];
+      keyMatch = [key];
       break;
     }
   }
@@ -103,4 +105,5 @@ window.addEventListener('keydown', function(e){
     alert('"YOU ARE AN EVENT HANDLER GURUUUUUUUUU!"');
     keyMatch = [];
   }
+  console.log(keyMatch);
 }, false);
